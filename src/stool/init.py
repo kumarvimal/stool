@@ -10,6 +10,8 @@ from pathlib import Path
 
 import invoke
 
+from .utils import confirm
+
 TASKS_PY_CONTENT = '''"""
 Task definitions for this project.
 
@@ -61,11 +63,11 @@ def project(ctx, add_to_gitignore=False, global_gitignore=False):
     """
     from . import _shell
 
-    if shell.root is None:
+    if _shell.root is None:
         print("Error: No project root set")
         return
 
-    project_root = shell.root
+    project_root = _shell.root
 
     # Create tasks.py if it doesn't exist
     tasks_file = project_root / "tasks.py"
@@ -94,10 +96,10 @@ def project(ctx, add_to_gitignore=False, global_gitignore=False):
 
     # Handle gitignore
     if add_to_gitignore or global_gitignore:
-        _add_to_gitignore(
-            project_root,
-            global_ignore=global_gitignore
-        )
+        _add_to_gitignore(project_root, global_ignore=global_gitignore)
+    else:
+        if confirm("\nAdd tasks.py and _stool/ to .gitignore?", default=True):
+            _add_to_gitignore(project_root, global_ignore=True)
 
     print("\n✓ Initialization complete!")
     print("\nNext steps:")
@@ -196,11 +198,11 @@ def clean(ctx):
     """
     from . import _shell
 
-    if shell.root is None:
+    if _shell.root is None:
         print("Error: No project root set")
         return
 
-    project_root = shell.root
+    project_root = _shell.root
 
     print("⚠ This will remove stool files from the project:")
     print(f"  - {project_root / 'tasks.py'}")
@@ -222,6 +224,7 @@ def clean(ctx):
     stool_dir = project_root / "_stool"
     if stool_dir.exists():
         import shutil
+
         shutil.rmtree(stool_dir)
         print(f"✓ Removed {stool_dir}/")
 

@@ -147,9 +147,8 @@ stool-init              # Creates tasks.py
 ### hello - Example commands
 
 ```bash
-inv hello              # Hello world (default)
+inv hello              # Hello current user (default)
 inv hello.user         # Greet current user
-inv hello.project      # Show project info
 ```
 
 ### init - Project initialization

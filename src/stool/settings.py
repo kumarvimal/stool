@@ -26,11 +26,7 @@ def create_env(**kwargs: Any) -> Settings:
     :param kwargs: Additional settings to merge
     :return: Settings object
     """
-    result = Settings(
-        user=_shell.find_user(),
-        disabled_tasks=[],
-        **kwargs
-    )
+    result = Settings(user=_shell.find_user(), disabled_tasks=[], **kwargs)
     return result
 
 
@@ -45,6 +41,7 @@ def load() -> Settings:
     """
     try:
         from _stool import _settings
+
         return _settings.env
     except (ImportError, AttributeError):
         return create_env()

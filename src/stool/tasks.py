@@ -81,10 +81,7 @@ def init(tasks_file: str) -> invoke.Collection:
                 if not isinstance(item, invoke.Task):
                     continue
 
-                if (
-                    prefix == "BUILTIN"
-                    and f"{name}.{item.name}" in disabled_spaces
-                ):
+                if prefix == "BUILTIN" and f"{name}.{item.name}" in disabled_spaces:
                     continue
 
                 if item.is_default:
@@ -126,11 +123,7 @@ def init(tasks_file: str) -> invoke.Collection:
                 task,
                 attr,
                 [
-                    (
-                        _SPACES["default"][item]
-                        if isinstance(item, str)
-                        else item
-                    )
+                    (_SPACES["default"][item] if isinstance(item, str) else item)
                     for item in getattr(task, attr)
                 ],
             )

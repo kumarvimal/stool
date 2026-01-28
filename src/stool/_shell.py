@@ -35,4 +35,5 @@ def find_user() -> str:
     :return: Username
     """
     import getpass
+
     return getpass.getuser()
