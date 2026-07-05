@@ -32,6 +32,13 @@ dev = [
     "ruff>=0.1.0",
     "ipython"
 ]
+pdf = [
+    "pypdf>=5.0.0",
+]
+all = [
+    "invoke>=2.2.0",
+    "pypdf>=5.0.0",
+]
 
 [tool.hatchling.build.targets.wheel]
 packages = ["src/stool"]

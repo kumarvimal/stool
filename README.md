@@ -4,7 +4,7 @@ Modern Python project task management with automatic command discovery.
 
 ## Overview
 
-`stool` is a task management framework inspired by `py-invoked` but built with modern Python practices (Python 3.13+). It provides:
+`stool` is a task management framework built with modern Python practices. It provides:
 
 - **Zero-config task discovery**: Install the package and bootstrap with one command
 - **Automatic merging**: Builtin commands + your custom commands unified
@@ -15,6 +15,13 @@ Modern Python project task management with automatic command discovery.
 
 ```bash
 pip install stool
+```
+
+For PDF commands:
+
+```bash
+pip install "stool[all]"
+brew install ghostscript  # for image recompression
 ```
 
 ## Quick Start
@@ -31,7 +38,8 @@ stool-init
 # Complete setup (creates _stool/ directory)
 inv init.project
 
-# Or with gitignore:
+# Or with gitignore: 
+# (in case you don't want to commit stool related files in your project)
 inv init.project --add-to-gitignore
 inv init.project --global-gitignore
 ```
@@ -39,15 +47,15 @@ inv init.project --global-gitignore
 ### Method 2: Manual Setup
 
 1. Create `tasks.py` in your project root:
-```python
-from stool.tasks import init as namespace
-namespace = namespace(__file__)
-```
+    ```python
+    from stool.tasks import init as namespace
+    namespace = namespace(__file__)
+    ```
 
 2. Complete setup:
-```bash
-inv init.project
-```
+    ```bash
+    inv init.project
+    ```
 
 ### Verify Installation
 
@@ -156,6 +164,15 @@ inv hello.user         # Greet current user
 ```bash
 inv init.project       # Initialize stool in current project
 inv init.clean         # Remove stool from project
+```
+
+### pdf - PDF utilities
+
+```bash
+inv pdf.compress --source input.pdf --output output.pdf
+inv pdf.compress --source input.pdf --quality screen     # Smaller, lower quality
+inv pdf.compress --source input.pdf --lossless           # No image recompression
+inv pdf.compres --source input.pdf --output output.pdf   # Alias
 ```
 
 ## How It Works
