@@ -16,7 +16,7 @@ TASKS_PY_CONTENT = '''"""
 Task definitions for this project.
 
 This file bootstraps stool and makes all commands available.
-Run 'inv -l' to see available tasks.
+Run 'stool -l' to see available tasks.
 """
 
 from stool.tasks import init as namespace
@@ -103,7 +103,7 @@ def project(ctx, add_to_gitignore=False, global_gitignore=False):
 
     print("\n✓ Initialization complete!")
     print("\nNext steps:")
-    print("  1. Run 'inv -l' to see available tasks")
+    print("  1. Run 'stool -l' to see available tasks")
     print("  2. Add custom tasks in _stool/ directory")
     print("  3. Configure settings in _stool/_settings.py")
 

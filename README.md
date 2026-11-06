@@ -14,13 +14,15 @@ Modern Python project task management with automatic command discovery.
 ## Installation
 
 ```bash
-pip install stool
+uv tool install stool
 ```
+
+Use `st` as a shorter alias for `stool`.
 
 For PDF commands:
 
 ```bash
-pip install "stool[all]"
+uv tool install "stool[all]"
 brew install ghostscript  # for image recompression
 ```
 
@@ -36,12 +38,12 @@ cd my-project
 stool-init
 
 # Complete setup (creates _stool/ directory)
-inv init.project
+stool init.project
 
 # Or with gitignore: 
 # (in case you don't want to commit stool related files in your project)
-inv init.project --add-to-gitignore
-inv init.project --global-gitignore
+stool init.project --add-to-gitignore
+stool init.project --global-gitignore
 ```
 
 ### Method 2: Manual Setup
@@ -54,20 +56,20 @@ inv init.project --global-gitignore
 
 2. Complete setup:
     ```bash
-    inv init.project
+    stool init.project
     ```
 
 ### Verify Installation
 
 ```bash
 # List all available tasks
-inv -l
+stool -l
 
 # Run the hello world example
-inv hello
+stool hello
 
 # Get help for a specific task
-inv hello --help
+stool hello --help
 ```
 
 ## Project Structure
@@ -109,8 +111,8 @@ def staging(ctx):
 Your tasks are immediately available:
 
 ```bash
-inv deploy              # Runs deploy.production (default)
-inv deploy.staging      # Runs deploy.staging
+stool deploy              # Runs deploy.production (default)
+stool deploy.staging      # Runs deploy.staging
 ```
 
 ## Configuration
@@ -155,42 +157,42 @@ stool-init              # Creates tasks.py
 ### hello - Example commands
 
 ```bash
-inv hello              # Hello current user (default)
-inv hello.user         # Greet current user
+stool hello              # Hello current user (default)
+stool hello.user         # Greet current user
 ```
 
 ### init - Project initialization
 
 ```bash
-inv init.project       # Initialize stool in current project
-inv init.clean         # Remove stool from project
+stool init.project       # Initialize stool in current project
+stool init.clean         # Remove stool from project
 ```
 
 ### pdf - PDF utilities
 
 ```bash
-inv pdf.compress --source input.pdf --output output.pdf
-inv pdf.compress --source input.pdf --quality screen     # Smaller, lower quality
-inv pdf.compress --source input.pdf --lossless           # No image recompression
-inv pdf.compres --source input.pdf --output output.pdf   # Alias
+stool pdf.compress --source input.pdf --output output.pdf
+stool pdf.compress --source input.pdf --quality screen     # Smaller, lower quality
+stool pdf.compress --source input.pdf --lossless           # No image recompression
+stool pdf.compres --source input.pdf --output output.pdf   # Alias
 ```
 
 ## How It Works
 
 ### The Bootstrap Problem
 
-Without `tasks.py`, you can't run `inv` commands. The `stool-init` command solves this:
+Without `tasks.py`, you can't run `stool` commands. The `stool-init` command solves this:
 
 ```bash
 pip install stool       # Install stool
 cd my-project
-stool-init             # Creates tasks.py (doesn't need inv)
-inv init.project       # Now inv works! Creates _stool/
+stool-init             # Creates tasks.py (doesn't need stool)
+stool init.project       # Now stool works! Creates _stool/
 ```
 
 ### Task Discovery
 
-When you run `inv`, the system:
+When you run `stool`, the system:
 
 1. Scans `stool/` (installed package) for builtin commands
 2. Scans your project's `_stool/` for local commands
@@ -214,11 +216,11 @@ This:
 
 ## Gitignore Support
 
-The `inv init.project` command can automatically add stool files to gitignore.
+The `stool init.project` command can automatically add stool files to gitignore.
 
 ### Interactive Prompt
 
-When you run `inv init.project` (after `stool-init`), it will ask:
+When you run `stool init.project` (after `stool-init`), it will ask:
 
 ```
 Do you want to add stool files to gitignore?
@@ -233,10 +235,10 @@ Or use flags to skip the prompt:
 
 ```bash
 # Add to local .gitignore
-inv init.project --add-to-gitignore
+stool init.project --add-to-gitignore
 
 # Add to global ~/.gitignore_global
-inv init.project --global-gitignore
+stool init.project --global-gitignore
 ```
 
 ## Advanced Usage
@@ -258,7 +260,7 @@ def prod(ctx):
     pass
 ```
 
-Now available as: `inv deploy.prod`
+Now available as: `stool deploy.prod`
 
 ### Task Dependencies
 
