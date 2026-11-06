@@ -18,27 +18,28 @@ my-project/
 
 ## Usage
 
-1. Install stool in your environment:
+1. Install stool as an isolated tool:
    ```bash
-   pip install stool
+   uv tool install stool
    ```
 
 2. Initialize (two options):
    ```bash
    # Option 1: Use standalone command
    stool-init            # Creates tasks.py
-   inv init.project      # Creates _stool/ directory
+   stool init.project      # Creates _stool/ directory
 
    # Option 2: Manual
    # Create tasks.py with 2 lines, then:
-   inv init.project      # Creates _stool/ directory
+   stool init.project      # Creates _stool/ directory
    ```
 
 3. Use commands:
    ```bash
-   inv -l                # List all tasks
-   inv hello             # Run builtin command
-   inv deploy            # Run custom command
+   stool -l                # List all tasks
+   stool hello             # Run builtin command
+   stool deploy            # Run custom command
+   st deploy               # Short alias
    ```
 
 ## Key Points

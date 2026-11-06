@@ -3,18 +3,26 @@ Command-line interface
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Minimal standalone CLI that creates tasks.py.
-Once tasks.py exists, users can access full inv commands.
+Once tasks.py exists, users can access full stool commands.
 """
 
 import sys
+from importlib.metadata import version
 from pathlib import Path
+
+from invoke import Program
+
+
+def run() -> None:
+    """Run Invoke using Stool's installed environment."""
+    Program(name="Stool", binary="stool", version=version("stool")).run()
 
 
 TASKS_PY_CONTENT = '''"""
 Task definitions for this project.
 
 This file bootstraps stool and makes all commands available.
-Run 'inv -l' to see available tasks.
+Run 'stool -l' to see available tasks.
 """
 
 from stool.tasks import init as namespace
@@ -28,7 +36,7 @@ def init_project():
     Initialize stool by creating tasks.py.
 
     This minimal bootstrap creates only tasks.py.
-    After that, use 'inv init.project' for full setup.
+    After that, use 'stool init.project' for full setup.
 
     Can be run without existing tasks.py file.
     """
@@ -44,7 +52,7 @@ def init_project():
         print(f"⚠️  tasks.py already exists!")
         print()
         print("Next steps:")
-        print("  Run 'inv init.project' to complete setup")
+        print("  Run 'stool init.project' to complete setup")
         return
 
     tasks_file.write_text(TASKS_PY_CONTENT)
@@ -53,8 +61,8 @@ def init_project():
     print("✓ Bootstrap complete!")
     print()
     print("Next steps:")
-    print("  1. Run 'inv init.project' to create _stool/ directory and settings")
-    print("  2. Or run 'inv -l' to see all available commands")
+    print("  1. Run 'stool init.project' to create _stool/ directory and settings")
+    print("  2. Or run 'stool -l' to see all available commands")
 
 
 def main():
@@ -70,7 +78,7 @@ def main():
         print("  - _stool/ directory for custom tasks")
         print("  - _stool/_settings.py for configuration")
         print()
-        print("After initialization, use 'inv -l' to see available tasks.")
+        print("After initialization, use 'stool -l' to see available tasks.")
         sys.exit(0)
 
     try:

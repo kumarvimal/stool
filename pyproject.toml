@@ -23,6 +23,8 @@ dependencies = [
 ]
 
 [project.scripts]
+stool = "stool.cli:run"
+st = "stool.cli:run"
 stool-init = "stool.cli:main"
 
 [project.optional-dependencies]
