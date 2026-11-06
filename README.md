@@ -287,3 +287,33 @@ def check(ctx):
     if exists('hello.world'):
         print("hello.world exists")
 ```
+
+### Git worktrees
+
+```bash
+st git.worktree feat/example
+st git.worktree feat/example --path ../custom-checkout
+st git.list
+```
+
+New worktrees default to `<project>/.worktree/<sanitized-branch>`.
+New branches start at the current HEAD; existing branches reuse their checkout.
+The command adds `.worktree/` to the global Git ignore file, preserving other rules.
+It uses `core.excludesFile` when set, otherwise `$XDG_CONFIG_HOME/git/ignore`
+(or `~/.config/git/ignore`). Ignore-file errors stop creation.
+
+Choose files separately for each project in `_stool/_settings.py`:
+
+```python
+from stool.settings import create_env
+
+env = create_env(
+    worktree_symlink=["_stool", "tasks.py", ".venv"],
+    worktree_copy=[".env"],
+)
+```
+
+Both lists default to empty. Paths are relative to the source checkout.
+Missing sources and existing destinations are skipped. Directories can be copied
+or linked. Running the command again also prepares missing files in an existing
+worktree. Remove any local `git.worktree` task to use the built-in task.
