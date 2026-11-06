@@ -5,8 +5,7 @@ Settings management
 Configuration and settings for stool.
 """
 
-from pathlib import Path
-from typing import Any, Dict, List, Set
+from typing import Any
 
 from . import _shell
 
@@ -26,7 +25,14 @@ def create_env(**kwargs: Any) -> Settings:
     :param kwargs: Additional settings to merge
     :return: Settings object
     """
-    result = Settings(user=_shell.find_user(), disabled_tasks=[], **kwargs)
+    defaults = dict(
+        user=_shell.find_user(),
+        disabled_tasks=[],
+        worktree_symlink=[],
+        worktree_copy=[],
+    )
+    defaults.update(kwargs)
+    result = Settings(**defaults)
     return result
 
 
