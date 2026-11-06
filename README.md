@@ -317,3 +317,19 @@ Both lists default to empty. Paths are relative to the source checkout.
 Missing sources and existing destinations are skipped. Directories can be copied
 or linked. Running the command again also prepares missing files in an existing
 worktree. Remove any local `git.worktree` task to use the built-in task.
+
+### Development ports
+
+```bash
+st port.clear               # Stop processes listening on the default port
+st port.clear --port 9000   # Override for this invocation
+```
+
+`port.clear-used-port` is also available. Requires `lsof` and a POSIX shell.
+The default port is 8000. Override it per project in `_stool/_settings.py`:
+
+```python
+from stool.settings import create_env
+
+env = create_env(default_port=9000)
+```

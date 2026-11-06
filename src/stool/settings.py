@@ -28,6 +28,7 @@ def create_env(**kwargs: Any) -> Settings:
     defaults = dict(
         user=_shell.find_user(),
         disabled_tasks=[],
+        default_port=8000,
         worktree_symlink=[],
         worktree_copy=[],
     )
